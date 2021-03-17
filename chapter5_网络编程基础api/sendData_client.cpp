@@ -25,6 +25,11 @@ int main(int argc, char* argv[]) {
     int sockfd = socket(PF_INET, SOCK_STREAM, 0);
     assert(sockfd >= 0);
 
+    int sendBuf = atoi(argv[3]);
+    int len = sizeof(sendBuf);
+    /*set TCP send buffer size*/
+    setsockopt(sockfd, SOL_SOCKET, SO_SNDBUF, &sendBuf, len);
+
     if (connect(sockfd, (struct sockaddr*)&server_address, sizeof(server_address)) < 0)
     {
         std::cout << "connection failed.";

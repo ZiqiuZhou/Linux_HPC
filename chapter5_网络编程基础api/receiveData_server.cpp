@@ -29,6 +29,10 @@ int main(int argc, char* argv[])
     int sockfd = socket(PF_INET, SOCK_STREAM, 0);
     assert(sockfd >= 0);
 
+    int recvbuf = atoi(argv[3]);
+    int len = sizeof(recevbuf);
+    setsocketopt(sock, SOL_SOCKET, SO_RCVBUF, &recvbuf, len);
+
     int ret = bind(sockfd, (struct sockaddr*)&address, sizeof(address));
     assert(ret != -1);
 
